@@ -43,7 +43,7 @@ exports.updateUser = (req, res) => {
 };
 
 exports.deleteUser = (req, res) => {
-  User.remove({ _id: req.params.userid }, (err, user) => {
+  User.deleteOne({ _id: req.params.userid }, (err, user) => {
     if (err) {
       res.status(404).send(err);
     }
