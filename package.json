@@ -1,7 +1,7 @@
 {
   "name": "nodejs-restapi",
   "version": "0.1.0",
-  "description": "",
+  "description": "Node API",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
@@ -17,5 +17,6 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.3"
-  }
+  },
+  "homepage": "https://github.com/nishs9/FoodFinderAPI#readme"
 }
