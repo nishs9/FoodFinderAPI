@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const dbURI =
-  "mongodb://newuser:myNewPassword@cluster0-shard-00-00-gibou.mongodb.net:27017,cluster0-shard-00-01-gibou.mongodb.net:27017,cluster0-shard-00-02-gibou.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
+  "mongodb://nishs9:mas2019@mas-cluster-shard-00-00-whhsb.mongodb.net:27017,mas-cluster-shard-00-01-whhsb.mongodb.net:27017,mas-cluster-shard-00-02-whhsb.mongodb.net:27017/mas-database?ssl=true&replicaSet=MAS-Cluster-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 const options = {
   reconnectTries: Number.MAX_VALUE,
@@ -19,4 +19,4 @@ mongoose.connect(dbURI, options).then(
 
 // require any models
 
-require("../models/Task");
+require("../models/User");
