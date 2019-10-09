@@ -20,7 +20,7 @@ exports.createNewUser = (req, res) => {
 };
 
 exports.readUser = (req, res) => {
-  User.findById(req.params.userid, (err, user) => {
+  User.find(req.params, (err, user) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -30,7 +30,7 @@ exports.readUser = (req, res) => {
 
 exports.updateUser = (req, res) => {
   User.findOneAndUpdate(
-    { _id: req.params.userid },
+    { username: req.params.username },
     req.body,
     { new: true },
     (err, user) => {
@@ -43,7 +43,7 @@ exports.updateUser = (req, res) => {
 };
 
 exports.deleteUser = (req, res) => {
-  User.deleteOne({ _id: req.params.userid }, (err, user) => {
+  User.deleteOne({ username: req.params.username }, (err, user) => {
     if (err) {
       res.status(404).send(err);
     }

@@ -19,7 +19,7 @@ app
   .post(userController.createNewUser);
 
 app
-  .route("/UserData/:userid")
+  .route("/UserData/:username")
   .get(userController.readUser)
   .put(userController.updateUser)
   .delete(userController.deleteUser);
