@@ -54,3 +54,14 @@ exports.deleteUser = (req, res) => {
     res.status(200).json({ message: "User successfully deleted" });
   });
 };
+
+exports.authenticateUser = (req, res) => {
+  var testHash = bcrypt.hashSync(req.params.password, salt);
+  User.findOne({ username: req.params.username, password: testHash }, (err, user) => {
+    if (user) {
+      res.status(200).json({ message: testHash});
+    } else {
+      res.status(500).json({ message: "Authentication failed!"});
+    }
+  });
+};

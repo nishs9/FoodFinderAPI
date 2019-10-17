@@ -24,6 +24,10 @@ app
   .put(userController.updateUser)
   .delete(userController.deleteUser);
 
+app
+  .route("/UserData/:username/:password")
+  .get(userController.authenticateUser);
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
