@@ -56,12 +56,15 @@ exports.deleteUser = (req, res) => {
 };
 
 exports.authenticateUser = (req, res) => {
-  var testHash = bcrypt.hashSync(req.params.password, salt);
-  User.findOne({ username: req.params.username, password: testHash }, (err, user) => {
+  User.findOne({ username: req.params.username }, (err, user) => {
     if (user) {
-      res.status(200).json({ message: testHash});
+      if (bcrypt.compareSync(req.params.password, user.get('password'))) {
+        res.status(200).json({ message: "Authentication successful!"});
+      } else {
+        res.status(401).json({ message: "Authentication failed!"});
+      }
     } else {
-      res.status(500).json({ message: "Authentication failed!"});
+      res.status(401).json({ message: "Authentication failed!"});
     }
   });
 };
