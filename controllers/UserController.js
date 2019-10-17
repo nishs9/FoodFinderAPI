@@ -12,14 +12,22 @@ exports.listAllUsers = (req, res) => {
 };
 
 exports.createNewUser = (req, res) => {
-  var hash = bcrypt.hashSync(req.body.password, salt);
-  req.body.password = hash;
-  let newUser = new User(req.body);
-  newUser.save((err, user) => {
-    if (err) {
+  User.findOne({ username: req.body.username }, (err, existingUser) => {
+    if (existingUser) {
+      res.status(403).json({ message: "Username already exists" });
+    } else if (err) {
       res.status(500).send(err);
+    } else {
+      var hash = bcrypt.hashSync(req.body.password, salt);
+      req.body.password = hash;
+      let newUser = new User(req.body);
+      newUser.save((err, user) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+        res.status(201).json(user);
+      });
     }
-    res.status(201).json(user);
   });
 };
 
@@ -34,10 +42,7 @@ exports.readUser = (req, res) => {
 
 exports.updateUser = (req, res) => {
   User.findOneAndUpdate(
-    { username: req.params.username },
-    req.body,
-    { new: true },
-    (err, user) => {
+    { username: req.params.username }, req.body, { new: true }, (err, user) => {
       if (err) {
         res.status(500).send(err);
       }
