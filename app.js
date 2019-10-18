@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const userController = require("./controllers/UserController");
+const imgController = require("./controllers/ImageController");
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -42,6 +43,10 @@ app
 app
   .route("/UserData/:username/:password")
   .get(userController.authenticateUser);
+
+app
+  .route("/Image")
+  .post(imgController.addImage);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
