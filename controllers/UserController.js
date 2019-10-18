@@ -64,12 +64,12 @@ exports.authenticateUser = (req, res) => {
   User.findOne({ username: req.params.username }, (err, user) => {
     if (user) {
       if (bcrypt.compareSync(req.params.password, user.get('password'))) {
-        res.status(200).json({ message: "Authentication successful!"});
+        res.send(true);
       } else {
-        res.status(401).json({ message: "Authentication failed!"});
+        res.send(false);
       }
     } else {
-      res.status(401).json({ message: "Authentication failed!"});
+      res.send(false);
     }
   });
 };
