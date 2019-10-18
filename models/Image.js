@@ -22,8 +22,8 @@ const ImageSchema = new Schema({
 module.exports = mongoose.model("Image", ImageSchema);
 
 ImageSchema.plugin(autoIncrement.plugin, {
-  model: 'Image',
-  field: 'imgID',
-  startAt: '1000',
-  incrementBy: '1',
+    model: 'Image',
+    field: 'imgID',
+    startAt: '1000',
+    incrementBy: '1',
 });
