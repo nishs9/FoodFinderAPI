@@ -11,7 +11,7 @@ const ImageSchema = new Schema({
     required: true
   },
   img: {
-      data: Buffer,
+      data: Buffer
   },
   createdOn: {
     type: Date,

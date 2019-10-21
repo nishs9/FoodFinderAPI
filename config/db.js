@@ -9,7 +9,6 @@ const dbURI =
 const options = {
   reconnectTries: Number.MAX_VALUE,
   poolSize: 10,
-  useNewURLParser: true,
   useUnifiedTopology: true
 };
 

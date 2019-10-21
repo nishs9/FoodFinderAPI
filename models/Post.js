@@ -6,15 +6,14 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
+  img: {
+      data: Buffer
+  },
   postTitle: {
     type: String,
     required: true
   },
   description: {
-    type: String,
-    required: true
-  },
-  image: {
     type: String,
     required: true
   },
@@ -24,4 +23,4 @@ const PostSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("PostData", UserSchema);
+module.exports = mongoose.model("PostData", PostSchema);
