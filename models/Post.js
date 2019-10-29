@@ -7,15 +7,14 @@ const PostSchema = new Schema({
     required: true
   },
   img: {
-      data: Buffer
+      data: Buffer,
+      contentType: String
   },
   postTitle: {
     type: String,
-    required: true
   },
   description: {
     type: String,
-    required: true
   },
   createdOn: {
     type: Date,

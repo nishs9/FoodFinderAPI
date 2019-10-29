@@ -3,12 +3,13 @@ var fs = require('fs');
 var Grid = require('gridfs-stream');
 
 //createPost body:
-// { username, imgPath, postTitle, description}
+// { username, filepath, postTitle, description}
 
 exports.createPost = (req, res) => {
-    var newPost = new Post;
+    var newPost = new Post();
     newPost.username = req.body.username;
-    newPost.img.data = fs.readFileSync(req.body.img);
+    //newPost.img.data = fs.readFileSync(req.body.filepath);
+    //newPost.img.contentType = 'image/png';
     newPost.postTitle = req.body.postTitle;
     newPost.description = req.body.description;
     newPost.save((err, post) => {
@@ -24,8 +25,7 @@ exports.getPost = (req, res) => {
         if (err) {
           res.status(500).send(err);
         } else {
-          res.set("Content-Type","img/png");
-          res.send(post.img);
+          res.send(post.img.data);
         }
     });
 };

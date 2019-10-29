@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const userController = require("./controllers/UserController");
-const postController = require("./controllers/PostController");
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -27,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(allowCrossDomain);
 
-// API ENDPOINTS
+// API ENDPOINTS FOR USER ACTIONS
 
 app
   .route("/UserData")
@@ -44,13 +43,41 @@ app
   .route("/UserData/:username/:password")
   .get(userController.authenticateUser);
 
-app
-  .route("/PostData")
-  .post(postController.createPost);
+//API LOGIC FOR IMAGE POSTING
 
-app
-  .route("/PostData/:username")
-  .get(postController.getPost);
+var fs = require('fs');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var ImageSchema = new Schema(
+  { img:
+    { data: Buffer, contentType: String}
+  }
+);
+
+var Image = mongoose.model('Images',ImageSchema);
+
+app.post('/Images', function(req, res) {
+  var newImage = new Image();
+  newImage.img.data = fs.readFileSync("/home/nish/github/FoodFinderAPI/test.png");
+  newImage.img.contentType = 'image/png';
+  newImage.save((err, img) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(201).json({ message: "Image posted!" });
+  });
+});
+
+app.get('/Images', function(req, res) {
+  Image.findOne({}, (err, img) => {
+    if (err) {
+      img.status(500).send(err)
+    }
+    res.contentType(img.img.contentType);
+    res.send(img.img.data);
+  });
+});
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
