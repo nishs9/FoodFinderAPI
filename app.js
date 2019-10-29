@@ -59,7 +59,7 @@ var Image = mongoose.model('Images',ImageSchema);
 
 app.post('/Images', function(req, res) {
   var newImage = new Image();
-  newImage.img.data = fs.readFileSync("/home/nish/github/FoodFinderAPI/test.png");
+  newImage.img.data = fs.readFileSync(req.body.filepath);
   newImage.img.contentType = 'image/png';
   newImage.save((err, img) => {
     if (err) {
