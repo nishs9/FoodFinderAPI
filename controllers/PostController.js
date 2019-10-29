@@ -3,7 +3,7 @@ var fs = require('fs');
 var Grid = require('gridfs-stream');
 
 //createPost body:
-// { username, filepath, postTitle, description}
+// { username, postTitle, description}
 
 exports.createPost = (req, res) => {
     var newPost = new Post();
