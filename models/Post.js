@@ -6,15 +6,15 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
-  img: {
-      data: Buffer,
-      contentType: String
-  },
   postTitle: {
     type: String,
+    required: true
   },
   description: {
     type: String,
+  },
+  likes: {
+    type: Number
   },
   createdOn: {
     type: Date,
@@ -22,4 +22,4 @@ const PostSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("PostData", PostSchema);
+module.exports = mongoose.model("Posts", PostSchema);
