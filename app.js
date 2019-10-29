@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const userController = require("./controllers/UserController");
+const postController = require("./controllers/PostController");
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -42,6 +43,10 @@ app
 app
   .route("/UserData/:username/:password")
   .get(userController.authenticateUser);
+
+app
+  .route("/Posts")
+  .post(postController.createPost);
 
 //API LOGIC FOR IMAGE POSTING
 

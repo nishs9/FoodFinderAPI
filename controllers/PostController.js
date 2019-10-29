@@ -8,10 +8,9 @@ var Grid = require('gridfs-stream');
 exports.createPost = (req, res) => {
     var newPost = new Post();
     newPost.username = req.body.username;
-    //newPost.img.data = fs.readFileSync(req.body.filepath);
-    //newPost.img.contentType = 'image/png';
     newPost.postTitle = req.body.postTitle;
     newPost.description = req.body.description;
+    newPost.likes = 0;
     newPost.save((err, post) => {
       if (err) {
         res.status(500).send(err);
@@ -21,7 +20,7 @@ exports.createPost = (req, res) => {
 };
 
 exports.getPost = (req, res) => {
-    Post.findOne( { username: req.params.username }, (err, post) => {
+    Post.find( { username: req.params.username }, (err, post) => {
         if (err) {
           res.status(500).send(err);
         } else {
