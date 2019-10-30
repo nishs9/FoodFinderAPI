@@ -52,18 +52,14 @@ exports.updateUser = (req, res) => {
 };
 
 exports.updateUserPassword = (req, res) => {
-  User.findOne({ username: req.params.username }, (err, existingUser) => {
-    if (existingUser) {
-      var hash = bcrypt.hashSync(req.body.password, salt);
-      req.body.password = hash;
-      existingUser.password = req.body.password;
-      res.status(201).json({ message: "Password succesfully changed" });
-    } else {
-      res.status(500).json({ message: "Password change failed" });
-    }
-    if (err) {
-      res.status(500).send(err);
-    }
+  var hash = bcrypt.hashSync(req.body.password, salt);
+  req.body.password = hash;
+  User.findOneAndUpdate(
+    { username: req.params.username }, req.body, { new: true }, (err, newPw) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+      res.status(200).json({ message: "Password updated!" });
   });
 };
 
