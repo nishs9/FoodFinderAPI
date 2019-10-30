@@ -45,6 +45,10 @@ app
   .get(userController.authenticateUser);
 
 app
+  .route("/UserData/:username/:isPasswordChange")
+  .put(userController.updateUserPassword);
+
+app
   .route("/Posts")
   .post(postController.createPost);
 
