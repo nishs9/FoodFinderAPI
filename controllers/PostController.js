@@ -1,9 +1,11 @@
 const Post = require("../models/Post");
+const mongoose = require("mongoose");
 var fs = require('fs');
 var Grid = require('gridfs-stream');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 //createPost body:
-// { username, postTitle, description}
+// { username, postTitle, description, imgPointer }
 
 exports.createPost = (req, res) => {
     var newPost = new Post();
@@ -11,20 +13,26 @@ exports.createPost = (req, res) => {
     newPost.postTitle = req.body.postTitle;
     newPost.description = req.body.description;
     newPost.likes = 0;
+    newPost.imgPointer = req.body.imgPointer;
     newPost.save((err, post) => {
       if (err) {
         res.status(500).send(err);
       }
-      res.status(201).json({ message: "Post created successfully" });
+      res.status(201).json({ message: "Post created successfully", postId: post._id });
     });
 };
 
 exports.getPost = (req, res) => {
-    Post.find( { username: req.params.username }, (err, post) => {
+    Post.findById(req.body.postId, (err, post) => {
         if (err) {
-          res.status(500).send(err);
+          res.status(500).json({ message: "Post does not exist" });
         } else {
-          res.send(post.img.data);
+          res.status(200).json(
+            { username: post.username,
+              postTitle: post.postTitle,
+              description: post.description,
+              imgPointer: post.imgPointer
+            });
         }
     });
 };

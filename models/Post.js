@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 const PostSchema = new Schema({
   username: {
@@ -15,6 +16,9 @@ const PostSchema = new Schema({
   },
   likes: {
     type: Number
+  },
+  imgPointer: {
+    type: ObjectId
   },
   createdOn: {
     type: Date,

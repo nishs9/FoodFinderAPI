@@ -15,7 +15,7 @@ exports.postImage = (req, res) => {
 };
 
 exports.getImage = (req, res) => {
-  Image.findOne({}, (err, img) => {
+  Image.findById(req.body.imgId, (err, img) => {
     if (err) {
       img.status(500).send(err)
     }

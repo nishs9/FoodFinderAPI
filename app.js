@@ -51,7 +51,8 @@ app
 
 app
   .route("/Posts")
-  .post(postController.createPost);
+  .post(postController.createPost)
+  .get(postController.getPost);
 
 app
   .route("/Images")
