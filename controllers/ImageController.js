@@ -4,7 +4,8 @@ var fs = require('fs');
 exports.postImage = (req, res) => {
   var newImage = new Image();
   newImage.data = fs.readFileSync(req.body.filepath);
-  newImage.contentType = 'image/png';
+  var imgType = req.body.filepath.substring(req.body.filepath.length - 3, req.body.filepath.length);
+  newImage.contentType = 'image/'.concat(imgType);
   newImage.save((err, img) => {
     if (err) {
       res.status(500).send(err);
