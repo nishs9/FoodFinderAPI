@@ -36,3 +36,14 @@ exports.getPost = (req, res) => {
         }
     });
 };
+
+exports.likePost = (req, res) => {
+    Post.findByIdAndUpdate(req.body.postId, {
+      $inc: { likes: 1 } }, { new: true }, (err, post) => {
+          if (err) {
+            res.status(500).json({ message: "Post does not exist" });
+          } else {
+            res.status(200).json({ likes: post.likes })
+          }
+      });
+};
