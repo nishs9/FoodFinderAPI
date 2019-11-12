@@ -37,7 +37,7 @@ app
 
 app
   .route("/UserData/:username")
-  .get(userController.readUser)
+  .get(userController.getUser)
   .put(userController.updateUser)
   .delete(userController.deleteUser);
 

@@ -31,6 +31,7 @@ exports.getPost = (req, res) => {
             { username: post.username,
               postTitle: post.postTitle,
               description: post.description,
+              likes: post.likes,
               imgPointer: post.imgPointer
             });
         }
