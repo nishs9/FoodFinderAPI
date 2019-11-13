@@ -38,6 +38,15 @@ exports.getPost = (req, res) => {
     });
 };
 
+exports.getAllPosts = (req, res) => {
+    Post.find({}, (err, user) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+      res.status(200).json(user);
+    });
+};
+
 exports.likePost = (req, res) => {
     Post.findByIdAndUpdate(req.body.postId, {
       $inc: { likes: 1 } }, { new: true }, (err, post) => {

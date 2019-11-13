@@ -56,6 +56,10 @@ app
   .put(postController.likePost);
 
 app
+  .route("/Posts/:allPosts")
+  .get(postController.getAllPosts);
+
+app
   .route("/Images")
   .post(imageController.postImage)
   .get(imageController.getImage)
