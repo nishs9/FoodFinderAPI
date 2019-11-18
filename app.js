@@ -62,8 +62,11 @@ app
 app
   .route("/Images")
   .post(imageController.postImage)
-  .get(imageController.getImage)
   .delete(imageController.deleteImage);
+
+app
+  .route("/Images/:imgId")
+  .get(imageController.getImage);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
