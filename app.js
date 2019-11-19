@@ -1,5 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const Image = require("./models/Image");
+
+var fs = require('fs');
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
+
 const userController = require("./controllers/UserController");
 const postController = require("./controllers/PostController");
 const imageController = require("./controllers/ImageController");
@@ -59,14 +65,26 @@ app
   .route("/Posts/:allPosts")
   .get(postController.getAllPosts);
 
-app
-  .route("/Images")
-  .post(imageController.postImage)
-  .delete(imageController.deleteImage);
-
+// app
+//   .route("/Images")
+//   .post(imageController.postImage)
+//   .delete(imageController.deleteImage);
+//
 app
   .route("/Images/:imgId")
   .get(imageController.getImage);
+
+app.post('/Images', upload.single('image'), function (req, res) {
+  var newImage = new Image();
+  newImage.data = fs.readFileSync(req.file.path)
+  newImage.contentType = 'image/png';
+  newImage.save((err, img) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(201).json({ message: "Image posted!", imgId: img._id });
+  });
+});
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
