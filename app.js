@@ -70,10 +70,10 @@ app
 //   .post(imageController.postImage)
 //   .delete(imageController.deleteImage);
 //
-app
-  .route("/Images/:imgId")
-  .get(imageController.getImage);
-
+// app
+//   .route("/Images/:imgId")
+//   .get(imageController.getImage);
+//
 app.post('/Images', upload.single('image'), function (req, res) {
   var newImage = new Image();
   newImage.data = fs.readFileSync(req.file.path)

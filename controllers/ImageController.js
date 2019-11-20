@@ -17,7 +17,7 @@ exports.postImage = (req, res) => {
 exports.getImage = (req, res) => {
   Image.findById(req.params.imgId, (err, img) => {
     if (err) {
-      img.status(500).send(err);
+      res.status(500).send(err);
     }
     res.contentType(img.contentType);
     res.send(img.data);
@@ -27,7 +27,7 @@ exports.getImage = (req, res) => {
 exports.deleteImage = (req, res) => {
   Image.findByIdAndDelete(req.body.imgId, (err, img) => {
     if (err) {
-      img.status(500).send(err);
+      res.status(500).send(err);
     }
     res.status(200).json({ message: "Image deleted! "})
   })
