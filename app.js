@@ -80,7 +80,7 @@ app.post('/Images', upload.single('image'), function (req, res) {
   newImage.contentType = 'image/png';
   newImage.save((err, img) => {
     if (err) {
-      res.status(500).send(err);
+      res.status(500).send(req);
     }
     res.status(201).json({ message: "Image posted!", imgId: img._id });
   });
