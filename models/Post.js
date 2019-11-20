@@ -12,13 +12,19 @@ const PostSchema = new Schema({
     required: true
   },
   description: {
-    type: String,
+    type: String
   },
   likes: {
     type: Number
   },
   imgPointer: {
     type: ObjectId
+  },
+  healthDescriptors: {
+    type: Array
+  },
+  dietaryRestrictions: {
+    type: Array
   },
   createdOn: {
     type: Date,

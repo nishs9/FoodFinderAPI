@@ -8,8 +8,7 @@ const UserSchema = new Schema({
     required: true
   },
   firstName: {
-    type: String,
-    required: true
+    type: String
   },
   lastName: {
     type: String
@@ -23,6 +22,9 @@ const UserSchema = new Schema({
     required: true
   },
   bio: {
+    type: String,
+  },
+  job: {
     type: String,
   },
   imgPointer: {
