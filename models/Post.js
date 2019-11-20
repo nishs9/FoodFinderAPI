@@ -17,8 +17,11 @@ const PostSchema = new Schema({
   likes: {
     type: Number
   },
-  imgPointer: {
-    type: ObjectId
+  imgData: {
+    type: Buffer
+  },
+  contentType: {
+    type: String
   },
   healthDescriptors: {
     type: Array
